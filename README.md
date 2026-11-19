@@ -1,6 +1,6 @@
 [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=PradoIT/MSFP3)
 
-# Práctica 4: Modelado y control del istema endócrino
+# Práctica 4: Modelado y control del sistema endócrino
 
 ## Información del estudiante
 David Esau Cerano Fuentes \[23210696]; L23210696@tijuana.tecnm.mx
@@ -83,12 +83,13 @@ Palabras clave: Sistema endócrino; Analogía eléctrica RLC; Función de transf
 
 ## Diagrama biológico del sistema endócrino (BioRender)
 
-<img width="1262" height="892" alt="image" src="https://github.com/user-attachments/assets/b3b77025-1b11-46be-b1ab-2f21773a69f1" />
-
+<p align="center">
+  <img width="850" alt="Diagrama biológico del sistema endócrino elaborado en BioRender" src="imagenes/sistema_endocrino_biorender.png" />
+</p>
 
 *Figura 1. Representación biológica del modelo del sistema endócrino y correspondencia de sus componentes eléctricos elaborada en BioRender.com (Prado Acosta Briseida, Contreras Kenia Yasdit, Cerano Fuentes David Esau).*
 
-> **Nota para el repositorio:** Asegúrate de guardar la imagen adjunta en la carpeta `imagenes/` con el nombre `sistema_endocrino_biorender.png` (o actualiza la ruta en la etiqueta `<img>` anterior según el nombre con el que la subas a GitHub).
+> **Nota para el repositorio:** Guarda la imagen en la carpeta `imagenes/` con el nombre `sistema_endocrino_biorender.png` (o actualiza la ruta en la etiqueta `<img>` según el nombre con el que la subas a GitHub).
 
 | Elemento | Estructura / Proceso biológico | Interpretación en el diagrama |
 | --- | --- | --- |
@@ -105,49 +106,56 @@ Palabras clave: Sistema endócrino; Analogía eléctrica RLC; Función de transf
 
 ### 1. Topología del circuito y análisis de mallas
 
-El circuito equivalente consta de una rama de entrada con la fuente $V_e(t)$ en serie con $R_1$, conectada a un nodo central donde se derivan en paralelo un capacitor $C$ hacia tierra y una rama en serie formada por el inductor $L$ y el resistor $R_2$. La tensión de salida $V_s(t)$ se mide sobre el resistor $R_2$ (o en el nodo correspondiente según la formulación de malla de salida).
+El circuito equivalente consta de una rama de entrada con la fuente $V_e(t)$ en serie con $R_1$, conectada a un nodo central donde se derivan en paralelo un capacitor $C$ hacia tierra y una rama en serie formada por el inductor $L$ y el resistor $R_2$. La tensión de salida $V_s(t)$ se mide sobre la carga $R_2$.
 
 Aplicando las leyes de voltaje de Kirchhoff a las dos mallas con corrientes $i_1(t)$ e $i_2(t)$:
 
 **Malla 1:**
+
 $$
 R_1 i_1(t) + \frac{1}{C} \int \left[i_1(t) - i_2(t)\right] dt = V_e(t)
 $$
 
 **Malla 2:**
+
 $$
 L \frac{d i_2(t)}{dt} + R_2 i_2(t) + \frac{1}{C} \int \left[i_2(t) - i_1(t)\right] dt = 0
 $$
 
-Y la tensión de salida en la carga $R_2$ está dada por:
+La tensión de salida en la carga $R_2$ está dada por:
+
 $$
 V_s(t) = R_2 i_2(t).
 $$
 
 ### 2. Obtención de la función de transferencia
 
-Aplicando la transformada de Laplace con condiciones iniciales nulas:
+Aplicando la transformada de Laplace con condiciones iniciales nulas, de la Malla 2 se obtiene la relación entre las corrientes de malla:
 
-De la Malla 2 se obtiene la relación entre las corrientes de malla:
 $$
 \frac{1}{Cs} \left[I_1(s) - I_2(s)\right] = (Ls + R_2) I_2(s)
 $$
 
 Despejando $I_1(s)$:
+
 $$
 I_1(s) - I_2(s) = Cs(Ls + R_2) I_2(s) \implies I_1(s) = \left[1 + Cs(Ls + R_2)\right] I_2(s).
 $$
 
 Sustituyendo $I_1(s)$ en la ecuación transformada de la Malla 1:
+
 $$
 V_e(s) = R_1 I_1(s) + (Ls + R_2) I_2(s)
 $$
+
 $$
 V_e(s) = R_1 \left[1 + Cs(Ls + R_2)\right] I_2(s) + (Ls + R_2) I_2(s)
 $$
+
 $$
 V_e(s) = \left[R_1 + R_1 L C s^2 + R_1 R_2 C s + Ls + R_2\right] I_2(s)
 $$
+
 $$
 V_e(s) = \left[R_1 L C s^2 + (L + R_1 R_2 C) s + (R_1 + R_2)\right] I_2(s).
 $$
@@ -188,37 +196,47 @@ $$
 V_s(\infty) = \lim_{s \to 0} s V_e(s) G(s) = \lim_{s \to 0} G(s) = \frac{R_2}{R_1 + R_2}.
 $$
 
-- **Valor final en Control:**
-  $$
-  V_{s,\mathrm{control}}(\infty) = \frac{100\,\mathrm{k}\Omega}{1\,\mathrm{k}\Omega + 100\,\mathrm{k}\Omega} = \frac{100}{101} \approx 0.9901\,\mathrm{V} \quad \Rightarrow \quad e_{\mathrm{ss,control}} = 1 - 0.9901 = 0.0099\,\mathrm{V}.
-  $$
+**Valor final en Control:**
 
-- **Valor final en Caso:**
-  $$
-  V_{s,\mathrm{caso}}(\infty) = \frac{1\,\mathrm{k}\Omega}{1\,\mathrm{k}\Omega + 1\,\mathrm{k}\Omega} = \frac{1}{2} = 0.5000\,\mathrm{V} \quad \Rightarrow \quad e_{\mathrm{ss,caso}} = 1 - 0.5000 = 0.5000\,\mathrm{V}.
-  $$
+$$
+V_{s,\mathrm{control}}(\infty) = \frac{100\,\mathrm{k}\Omega}{1\,\mathrm{k}\Omega + 100\,\mathrm{k}\Omega} = \frac{100}{101} \approx 0.9901\,\mathrm{V} \quad \Rightarrow \quad e_{\mathrm{ss,control}} = 1 - 0.9901 = 0.0099\,\mathrm{V}.
+$$
 
-El cambio de parámetros en el caso patológico provoca una caída del nivel hormonal estacionario de $0.99\,\mathrm{V}$ a $0.50\,\mathrm{V}$, generando un error en estado estacionario del $50\%$ respecto al estímulo unitario y de $0.49\,\mathrm{V}$ respecto al individuo sano.
+**Valor final en Caso:**
+
+$$
+V_{s,\mathrm{caso}}(\infty) = \frac{1\,\mathrm{k}\Omega}{1\,\mathrm{k}\Omega + 1\,\mathrm{k}\Omega} = \frac{1}{2} = 0.5000\,\mathrm{V} \quad \Rightarrow \quad e_{\mathrm{ss,caso}} = 1 - 0.5000 = 0.5000\,\mathrm{V}.
+$$
+
+El cambio de parámetros en el caso patológico provoca una caída del nivel hormonal estacionario de $0.99\,\mathrm{V}$ a $0.50\,\mathrm{V}$, generando un error en estado estacionario del $50$ % respecto al estímulo unitario y de $0.49\,\mathrm{V}$ respecto al individuo sano.
 
 ### 5. Análisis de estabilidad (Cálculo de polos)
 
-Las raíces del polinomio característico $s^2 + \frac{L + R_1 R_2 C}{R_1 L C} s + \frac{R_1 + R_2}{R_1 L C} = 0$ determinan la estabilidad en lazo abierto:
+Las raíces del polinomio característico determinan la estabilidad en lazo abierto:
 
-- **Polos para el Control:**
-  $$
-  s^2 + 1\,001\,000 s + 1.01 \times 10^9 = 0 \implies s_{1,2} = \frac{-1\,001\,000 \pm \sqrt{(1\,001\,000)^2 - 4(1)(1.01 \times 10^9)}}{2}
-  $$
-  $$
-  s_1 \approx -1010, \qquad s_2 \approx -999\,990.
-  $$
+$$
+s^2 + \frac{L + R_1 R_2 C}{R_1 L C} s + \frac{R_1 + R_2}{R_1 L C} = 0
+$$
 
-- **Polos para el Caso:**
-  $$
-  s^2 + 10\,001 s + 20\,000 = 0 \implies s_{1,2} = \frac{-10\,001 \pm \sqrt{(10\,001)^2 - 4(1)(20\,000)}}{2}
-  $$
-  $$
-  s_1 \approx -2, \qquad s_2 \approx -9999.
-  $$
+**Polos para el Control:**
+
+$$
+s^2 + 1\,001\,000 s + 1.01 \times 10^9 = 0 \implies s_{1,2} = \frac{-1\,001\,000 \pm \sqrt{(1\,001\,000)^2 - 4(1)(1.01 \times 10^9)}}{2}
+$$
+
+$$
+s_1 \approx -1010, \qquad s_2 \approx -999\,990.
+$$
+
+**Polos para el Caso:**
+
+$$
+s^2 + 10\,001 s + 20\,000 = 0 \implies s_{1,2} = \frac{-10\,001 \pm \sqrt{(10\,001)^2 - 4(1)(20\,000)}}{2}
+$$
+
+$$
+s_1 \approx -2, \qquad s_2 \approx -9999.
+$$
 
 En ambos escenarios, los polos son reales y estrictamente negativos (ubicados en el semiplano izquierdo del plano complejo $s$), por lo que **ambos sistemas son estables y presentan respuesta sobreamortiguada**. Sin embargo, el polo dominante del caso ($s_1 = -2$) está mucho más cerca del origen que el del control ($s_1 = -1010$), lo que implica una dinámica transitoria significativamente más lenta.
 
