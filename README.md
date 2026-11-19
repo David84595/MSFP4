@@ -77,7 +77,7 @@ $$
 e(t) = V_{s,\mathrm{control}}(t) - V_{s,\mathrm{caso}}(t).
 $$
 
-Palabras clave: Sistema endócrino; Analogía eléctrica RLC; Función de transferencia; Hipertiroidismo; Controlador PID; Simulación *in silico*.
+Palabras clave: Sistema endócrino; Analogía eléctrica RLC; Función de transferencia; Hipertiroidismo; Controlador PID;.
 
 ---
 
