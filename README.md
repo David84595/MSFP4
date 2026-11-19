@@ -1,6 +1,6 @@
 [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=PradoIT/MSFP3)
 
-# Práctica 5.6: Modelado y control del sistema endócrino
+# Práctica 4: Modelado y control del istema endócrino
 
 ## Información del estudiante
 David Esau Cerano Fuentes \[23210696]; L23210696@tijuana.tecnm.mx
@@ -83,7 +83,7 @@ Palabras clave: Sistema endócrino; Analogía eléctrica RLC; Función de transf
 
 ## Diagrama biológico del sistema endócrino (BioRender)
 
-
+[Sistema Endócrino.pdf](https://github.com/user-attachments/files/35059497/Sistema.Endocrino.pdf)
 
 
 *Figura 1. Representación biológica del modelo del sistema endócrino y correspondencia de sus componentes eléctricos elaborada en BioRender.com (Prado Acosta Briseida, Contreras Kenia Yasdit, Cerano Fuentes David Esau).*
