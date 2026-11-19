@@ -83,7 +83,7 @@ Palabras clave: Sistema endócrino; Analogía eléctrica RLC; Función de transf
 
 ## Diagrama biológico del sistema endócrino (BioRender)
 
-[Sistema Endócrino.pdf](https://github.com/user-attachments/files/35059497/Sistema.Endocrino.pdf)
+<img width="1262" height="892" alt="image" src="https://github.com/user-attachments/assets/b3b77025-1b11-46be-b1ab-2f21773a69f1" />
 
 
 *Figura 1. Representación biológica del modelo del sistema endócrino y correspondencia de sus componentes eléctricos elaborada en BioRender.com (Prado Acosta Briseida, Contreras Kenia Yasdit, Cerano Fuentes David Esau).*
